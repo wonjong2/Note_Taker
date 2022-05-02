@@ -17,7 +17,7 @@ app.get('/notes', (req, res) =>
 );
 
 app.get('/api/notes', (req, res) => 
-    fs.readFile(path.join('./db/db.json'), 'utf-8', (error, data) => error ? next(error) : res.json(JSON.parse(data))));
+    fs.readFile(path.join('./db/db.json'), 'utf-8', (error, data) => error ? res.status(500).json('Error in reading Notes') : res.json(JSON.parse(data))));
 
 app.get('*', (req, res) => 
     res.sendFile(path.join(__dirname, '/public/index.html'))
@@ -29,7 +29,8 @@ app.post('/api/notes', (req, res) => {
     if(title && text) {
         fs.readFile(path.join('./db/db.json'), 'utf-8', (error, data) => {
             if(error) {
-                next(error);
+                res.status(500).json('Error in creating Note');
+                return;
             }
             
             const newNote = {
@@ -45,7 +46,8 @@ app.post('/api/notes', (req, res) => {
 
             fs.writeFile('./db/db.json', noteListString, (err) => {
                 if(err) {
-                    next(err);
+                    res.status(500).json('Error in creating Note');
+                    return;
                 }
                 const response = {
                     status: 'success',
