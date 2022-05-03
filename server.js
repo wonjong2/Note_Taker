@@ -27,7 +27,7 @@ app.post('/api/notes', (req, res) => {
     const {title, text} = req.body;
 
     if(title && text) {
-        fs.readFile(path.join('./db/db.json'), 'utf-8', (error, data) => {
+        fs.readFile(path.join('./db/db.json'), 'utf8', (error, data) => {
             if(error) {
                 res.status(500).json('Error in creating Note');
                 return;
@@ -61,6 +61,28 @@ app.post('/api/notes', (req, res) => {
     else {
         res.status(500).json('Error in creating a note');
     }
+});
+
+app.delete('/api/notes/:id', (req, res) => {
+    const idFromReq = req.params.id;
+
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if(err) {
+            res.status(500).json('Error in reading notes');
+            return
+        }
+
+        let notesList = JSON.parse(data);
+
+        for(var i = 0; i < notesList.length; i++) {
+            if(notesList[i].id == idFromReq) {
+                notesList.splice(i, 1);
+                fs.writeFile('./db/db.json', JSON.stringify(notesList),(error) => err ? res.status(500).json('Error in writing notes') : console.log('Success'));
+                res.send('Note Deleted');
+                return;
+            }
+        }
+    });
 });
 
 app.listen(PORT, () =>
