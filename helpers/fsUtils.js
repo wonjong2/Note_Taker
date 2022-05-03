@@ -51,6 +51,7 @@ const readAndDelete = (path, reqId, res) => {
             return;
         }
         let noteList = JSON.parse(data);
+        // Finding the index of the object matched with reqId and then deleting it
         for(var i = 0; i < data.length; i++) {
             if(noteList[i].id == reqId) {
                 noteList.splice(i, 1);
