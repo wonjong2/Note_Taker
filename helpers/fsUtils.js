@@ -4,6 +4,13 @@ const util = require('util');
 // Promise version of fs.readFile
 const readFile = util.promisify(fs.readFile);
 
+/**
+ *  Function to read data from a given a file and add a new note
+ *  @param {string} path The path to the file you want to save to
+ *  @param {object} newNote The content you want to append to the file. 
+ *  @param {object} res The response to be sent to the client
+ *  @returns {void} Nothing
+ */
 const readAndAdd = (path, newNote, res) => {
     fs.readFile(path, 'utf8', (err, data) => {
         if(err) {
@@ -29,6 +36,14 @@ const readAndAdd = (path, newNote, res) => {
     });
 };
 
+
+/**
+ *  Function to read data from a given a file and delete a note with id
+ *  @param {string} path The path to the file you want to save to
+ *  @param {string} reqId The id of a note you want to delete from the file. 
+ *  @param {object} res The response to be sent to the client
+ *  @returns {void} Nothing
+ */
 const readAndDelete = (path, reqId, res) => {
     fs.readFile(path, 'utf8', (err, data) => {
         if(err) {
