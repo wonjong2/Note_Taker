@@ -4,7 +4,7 @@ const {readFile, readAndAdd, readAndDelete} = require('./helpers/fsUtils');
 // Loading the router module to handle 'api/notes' routes
 const notesRouter = require('./routes/notesRouter');
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
