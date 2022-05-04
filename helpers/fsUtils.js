@@ -19,7 +19,6 @@ const readAndAdd = (path, newNote, res) => {
         }
         let noteList = JSON.parse(data);
         noteList.push(newNote)
-        console.log(typeof noteList, noteList);
         const noteListString = JSON.stringify(noteList);
 
         fs.writeFile('./db/db.json', noteListString, (err) => {

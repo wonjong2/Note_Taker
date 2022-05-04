@@ -4,7 +4,6 @@ const {nanoid} = require('nanoid');
 const {readFile, readAndAdd, readAndDelete} = require('../helpers/fsUtils');
 
 router.get('/', (req, res) => {
-    console.log(`${req.method} received`);
     readFile('./db/db.json')
     .then(data => res.json(JSON.parse(data)))
     .catch(err => res.status(500).json('Error in reading notes'));
