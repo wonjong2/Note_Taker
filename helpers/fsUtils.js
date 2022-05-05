@@ -49,7 +49,7 @@ const readAndDelete = (path, reqId, res) => {
             res.status(500).json('Error in reading notes');
             return;
         }
-        let noteList = JSON.parse(data);
+        const noteList = JSON.parse(data);
         // Finding the index of the object matched with reqId and then deleting it
         for(var i = 0; i < data.length; i++) {
             if(noteList[i].id == reqId) {
