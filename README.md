@@ -7,7 +7,7 @@ This is a Note Taker application that can be used to write, save and delete note
 
 - Use node.js to implement this application
 - Use express.js back end 
-- Deploy an application to Heroku
+- Deploy an application to Heroku: https://note-taker-wonjong.herokuapp.com/
 - Use nanoid.js to generate unique IDs
 - Create a modular router for '/api/notes' path in notesRouter.js file
 
